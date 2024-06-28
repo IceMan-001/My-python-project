@@ -73,7 +73,7 @@ class Parser:
         print('Файл прочитан!')
 
     def get_currency_data_search(self):
-        today_s_date = self.soup.find('h2', class_="h2 blue").text.split()[3]
+        today_s_date = soup.find('h2', class_="h2 blue").text.split()[3]
         course = (input('Введите искомую валюту: ').upper().strip())
         for key, value in self.data.items():
             if course not in self.data:
