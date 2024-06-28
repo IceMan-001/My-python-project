@@ -1,5 +1,0 @@
-requests~=2.32.3
-tqdm~=4.66.4
-transliterate~=1.10.2
-bs4~=0.0.2
-beautifulsoup4~=4.12.3
