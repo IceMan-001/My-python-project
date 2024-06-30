@@ -1,0 +1,12 @@
+id,name,key_skills,professional_roles_id,professional_roles_name,metro_description,metro
+101282318,Junior+ DevOps Engineer,"Git, Docker, Linux, Nginx, DevOps, CI/CD, Мониторинг, ",160,DevOps-инженер,"Петроградская, ",Петроградская
+91858609,Системный Администратор (Linux) / DevOps,"Linux, Администрирование серверов Linux, Nginx, Python, MySQL, DevOps, ",113,Системный администратор,Не указана,Спортивная
+100632282,Junior/Middle C++ developer,"Английский язык, ",96,"Программист, разработчик",Не указана,Не указано
+100072226,Специалист по аналитике цепей поставок (логистика),,40,Другое,Не указана,Не указано
+98562325,Финансовый аналитик,"Финансовый анализ, Финансовый менеджмент, Инвестиционный анализ, Финансовая отчетность, ",134,"Финансовый аналитик, инвестиционный аналитик","Владимирская, Лиговский проспект, ",Электросила
+100749972,Наставник в школу программирования для детей,"Грамотная речь, Творческое мышление, Pascal, Python, С++, Коммуникабельность, ответственность, Индивидуальный подход, ",40,Другое,Не указана,Не указано
+100831655,Infrastructure Administrator (SysOps),"Linux, System Operations, KVM, Zabbix, Nagios, SolusVM, Grafana, Bash, Ansible, Python, ",114,Системный инженер,Не указана,Электросила
+98524154,Python Developer / Инженер-программист (TATLIN.FLEX),"RAID, SAN, NAS, Python, Linux, multithreaded programming, ",96,"Программист, разработчик",Не указана,Площадь Ленина
+99581179,QA automation engineer (Python) / Инженер по автоматизированному тестированию (Release engineering),"Python, QA, Linux, REST API, Docker, k8s, ",124,Тестировщик,"Новочеркасская, Площадь Ленина, ",Электросила
+101824013,Java back-end разработчик в ML команду ранжирования (Senior/Middle+),"Spring Boot, SQL, Elasticsearch, ML, Scala, Java, Docker, Kafka, ",96,"Программист, разработчик",Не указана,Электросила
+102076820,Старший С разработчик (BIOS/UEFI),"C, x86, PCIe, UEFI, BIOS, ",96,"Программист, разработчик",Не указана,Площадь Ленина
