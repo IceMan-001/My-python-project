@@ -22,6 +22,7 @@ def get_image_url(url: str) -> str | None:  # строка либо пустой
 
 
 def download_image(url: str):
+
     if not os.path.isdir('Dogs'):
         os.mkdir('Dogs')
     breed = url.split('/')[-2]
@@ -32,11 +33,12 @@ def download_image(url: str):
         if status == 200:
             image = response.content
             if os.path.isdir(f"{'Dogs'}\\{breed}"):
-                with open(f"{'Dogs'}\\{breed}\\{breed}_{breed_new}.jpg", 'ab') as file:
+                number = len(os.listdir(f"{'Dogs'}\\{breed}\\"))
+                with open(f"{'Dogs'}\\{breed}\\{number + 1}. {breed}_{breed_new}.jpg", 'ab') as file:
                     file.write(image)
             if not os.path.isdir(f"{'Dogs'}\\{breed}"):
                 os.mkdir(f"{'Dogs'}\\{breed}")
-                with open(f"{'Dogs'}\\{breed}\\{breed}_{breed_new}.jpg", 'ab') as file:
+                with open(f"{'Dogs'}\\{breed}\\{1}. {breed}_{breed_new}.jpg", 'ab') as file:
                     file.write(image)
         else:
             print('Не могу скачать картинку!')
@@ -80,3 +82,4 @@ for j in tqdm(range(1, count_image + 1), colour='green'):
         print('Error')
 
 sort_go(path_to_file='result/sort_answer.txt', path_to_the_report_folder='result')
+print("\N{smiling face with sunglasses}""\N{smiling face with sunglasses}""\N{smiling face with sunglasses}")
