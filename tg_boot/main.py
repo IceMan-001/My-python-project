@@ -23,10 +23,9 @@ async def process_command_start(massage: Message):
 
 @dp.message(Command(commands=['help']))
 async def process_command_help(massage: Message):
-    await massage.answer('Для вывода прогноза погоды: \n введите команду: "/weather" или воспользуйтесь пунктом меню.')
     await massage.answer(
-        'Для вывода прогноза курса валют: \n введите команду: "/courses" или воспользуйтесь пунктом меню.')
-    await massage.answer(
+        'Для вывода прогноза погоды: \n введите команду: "/weather" или воспользуйтесь пунктом меню. \n'
+        'Для вывода прогноза курса валют: \n введите команду: "/courses" или воспользуйтесь пунктом меню.\n '
         'Для вывода прогноза вакансий: \n введите команду: "/vacancies" или  воспользуйтесь пунктом меню.')
 
 

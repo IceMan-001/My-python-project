@@ -74,7 +74,7 @@ def sort_go(path_to_file: str, path_to_the_report_folder: str):
 URL = "https://dog.ceo/api/breeds/image/random"
 
 count_image = int(input('\033[3m\033[36mВведите количество фотографий для загрузки: \033[0m'))
-for j in tqdm(range(1, count_image + 1), colour='green'):
+for j in tqdm(range(1, count_image + 1), desc='Процесс загрузки фотографий', colour='green'):
     uri_image = get_image_url(URL)
     if uri_image is not None:
         download_image(uri_image)
