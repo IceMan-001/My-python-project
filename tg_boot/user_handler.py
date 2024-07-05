@@ -43,7 +43,7 @@ async def get_weather(message: Message):
 
     for time_of_day in times_of_day:
         sample = (f"{time_of_day}\n"
-                  f"<------------------------->"
+                  f"<------------------------->\n"
                   f"Tемпература °C {weather[time_of_day]['temperature']}\n "
                   f"{weather[time_of_day]['atmosfera']}\n "
                   f"Ощущается как °C{weather[time_of_day]['weather_feeling']}\n "
