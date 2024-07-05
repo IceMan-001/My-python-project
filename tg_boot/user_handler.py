@@ -22,18 +22,39 @@ async def get_courses(message: Message):
 @router.message(Command(commands=['weather']))
 async def get_weather(message: Message):
     weather = get_weather_today()
-    text = f"""
-    Погода на {weather['day_of_month']}
-    Ночью:
-    Температура: {weather['Ночь']['temperature']}
-    {weather['Ночь']['atmosfera']}
-    Ощущается: {weather['Ночь']['weather_feeling']}
-    Влажность: {weather['Ночь']['probability']}
-    Давление: {weather['Ночь']['pressure']}
-    Ветер: {weather['Ночь']['wind']['wind_direction']}, {weather['Ночь']['wind']['wind_kch']}
-    """
+    print(weather)
 
-    await message.answer(text=text)
+    # text = f"""
+    # Погода на {weather['day_of_month']}
+    # Ночью:
+    # Температура: {weather['Ночь']['temperature']}
+    # {weather['Ночь']['atmosfera']}
+    # Ощущается: {weather['Ночь']['weather_feeling']}
+    # Влажность: {weather['Ночь']['probability']}
+    # Давление: {weather['Ночь']['pressure']}
+    # Ветер: {weather['Ночь']['wind']['wind_direction']}, {weather['Ночь']['wind']['wind_kch']}
+    # """
+
+    # header = (f"{weather['day_of_week']} "
+    #           f"{weather['day_of_month']}")
+    # print(header)
+    times_of_day = ['Ночь', 'Утро', 'День', 'Вечер']
+    result = f"{weather['day_of_week']}, {weather['day_of_month']}\n "
+
+    for time_of_day in times_of_day:
+        sample = (f"{time_of_day}\n"
+                  f"<------------------------->"
+                  f"Tемпература °C {weather[time_of_day]['temperature']}\n "
+                  f"{weather[time_of_day]['atmosfera']}\n "
+                  f"Ощущается как °C{weather[time_of_day]['weather_feeling']}\n "
+                  f"Вероятность осадков {weather[time_of_day]['probability']}\n "
+                  f"Давление {weather[time_of_day]['pressure']} мм рт. ст.\n "
+                  f"Скорость ветра {weather[time_of_day]['wind']['wind_ms']} м.с, "
+                  f"{weather[time_of_day]['wind']['wind_kch']};\n "
+                  f"{weather[time_of_day]['wind']['wind_direction']}\n "
+                  f"Влажность воздуха {weather[time_of_day]['humidity']}\n")
+        result += sample
+    await message.answer(text=result)
 
 
 # этот хэндлер срабатывает на команду /start
