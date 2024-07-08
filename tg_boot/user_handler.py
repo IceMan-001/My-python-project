@@ -1,8 +1,8 @@
 from aiogram import Router, F
-from aiogram.filters import Command
+from aiogram.filters import Command, CommandStart
 from aiogram.types import Message, CallbackQuery
 
-from keyboards import keyboard, get_keyboard_inline
+from keyboards import keyboard, get_keyboard_inline, menu_items_builder
 from scripts.courses import Parser as CourseParser
 from scripts.weather import get_weather_today
 from scripts.vacancy import go_vacancy
@@ -17,6 +17,15 @@ async def get_courses(message: Message):
     await message.answer(f"{courses.data['USD']['name']} - {courses.data['USD']['course']} рублей")
     await message.answer(f"{courses.data['EUR']['name']} - {courses.data['EUR']['course']} рублей")
     await message.answer(f"{courses.data['CNY']['name']} - {courses.data['CNY']['course']} рублей")
+
+
+@router.message(Command(commands=['help']))
+async def get_courses(message: Message):
+    courses = CourseParser()
+    await message.answer(f"Список доступных команд:\n"
+                         f"1./courses --> для поучения текущего курса валют;\n"
+                         f"2./weather --> для получения текущего прогноза погоды;\n"
+                         f"3./vacancies --> для получения трех случайных вакансий.")
 
 
 # этот хэндлер срабатывает на команду /weather
@@ -82,10 +91,17 @@ async def get_weather(message: Message):
 
 
 # этот хэндлер срабатывает на команду /start
-@router.message(Command(commands=['start']))
+# @router.message(Command(commands=['start']))
+# async def process_command_start(message: Message):
+#     await message.answer("Привет! Меня зовут Топ-бот \nЯ умею находить текущий курс валют, "
+#                          "три случайные вакансии и погоду на сегодня.")
+
+# Keyboard Builder
+@router.message(CommandStart())
 async def process_command_start(message: Message):
-    await message.answer("Привет! Меня зовут Топ-бот \nЯ умею находить текущий курс валют, "
-                         "три случайные вакансии и погоду на сегодня.")
+    await message.reply(f"Привет! \nМеня зовут Топ-бот \nЯ умею находить текущий курс валют, "
+                        f"три случайные вакансии и погоду на сегодня.",
+                        reply_markup=await menu_items_builder())
 
 
 @router.message(Command(commands=["kb1"]))

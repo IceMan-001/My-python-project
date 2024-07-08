@@ -1,5 +1,6 @@
 from aiogram.types import (KeyboardButton, ReplyKeyboardMarkup,
                            InlineKeyboardButton, InlineKeyboardMarkup)
+from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardButton
 
 # кнопки для простой клавиатуры
 kb = [
@@ -31,3 +32,12 @@ def get_keyboard_inline():
     return inline_keyboard
 
 
+menu_items = ['Погода', 'Курс', 'Вакансии', ]
+
+
+# Keyboard Builder
+async def menu_items_builder():
+    keyboard_builder = ReplyKeyboardBuilder()
+    for menu_item in menu_items:
+        keyboard_builder.add(KeyboardButton(text=menu_item, resize_keyboard=True))
+    return keyboard_builder.adjust(3).as_markup()
