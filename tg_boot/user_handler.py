@@ -5,6 +5,7 @@ from aiogram.types import Message, CallbackQuery
 from keyboards import keyboard, get_keyboard_inline
 from scripts.courses import Parser as CourseParser
 from scripts.weather import get_weather_today
+from scripts.vacancy import go_vacancy
 
 router = Router()
 
@@ -22,37 +23,60 @@ async def get_courses(message: Message):
 @router.message(Command(commands=['weather']))
 async def get_weather(message: Message):
     weather = get_weather_today()
-    print(weather)
 
-    # text = f"""
-    # Погода на {weather['day_of_month']}
-    # Ночью:
-    # Температура: {weather['Ночь']['temperature']}
-    # {weather['Ночь']['atmosfera']}
-    # Ощущается: {weather['Ночь']['weather_feeling']}
-    # Влажность: {weather['Ночь']['probability']}
-    # Давление: {weather['Ночь']['pressure']}
-    # Ветер: {weather['Ночь']['wind']['wind_direction']}, {weather['Ночь']['wind']['wind_kch']}
-    # """
+    if weather is not None:
+        times_of_day = ['Ночь', 'Утро', 'День', 'Вечер']
+        result = f"{weather['day_of_week']}, {weather['day_of_month']}\n "
 
-    # header = (f"{weather['day_of_week']} "
-    #           f"{weather['day_of_month']}")
-    # print(header)
-    times_of_day = ['Ночь', 'Утро', 'День', 'Вечер']
-    result = f"{weather['day_of_week']}, {weather['day_of_month']}\n "
+        for time_of_day in times_of_day:
+            sample = (f"{time_of_day}\n"
+                      f"<------------------------->\n"
+                      f"Tемпература °C {weather[time_of_day]['temperature']}\n "
+                      f"{weather[time_of_day]['atmosfera']}\n "
+                      f"Ощущается как °C{weather[time_of_day]['weather_feeling']}\n "
+                      f"Вероятность осадков {weather[time_of_day]['probability']}\n "
+                      f"Давление {weather[time_of_day]['pressure']} мм рт. ст.\n "
+                      f"Скорость ветра {weather[time_of_day]['wind']['wind_ms']} м.с, "
+                      f"{weather[time_of_day]['wind']['wind_kch']};\n "
+                      f"{weather[time_of_day]['wind']['wind_direction']}\n "
+                      f"Влажность воздуха {weather[time_of_day]['humidity']}\n")
+            result += sample
+        await message.answer(text=result)
 
-    for time_of_day in times_of_day:
-        sample = (f"{time_of_day}\n"
-                  f"<------------------------->\n"
-                  f"Tемпература °C {weather[time_of_day]['temperature']}\n "
-                  f"{weather[time_of_day]['atmosfera']}\n "
-                  f"Ощущается как °C{weather[time_of_day]['weather_feeling']}\n "
-                  f"Вероятность осадков {weather[time_of_day]['probability']}\n "
-                  f"Давление {weather[time_of_day]['pressure']} мм рт. ст.\n "
-                  f"Скорость ветра {weather[time_of_day]['wind']['wind_ms']} м.с, "
-                  f"{weather[time_of_day]['wind']['wind_kch']};\n "
-                  f"{weather[time_of_day]['wind']['wind_direction']}\n "
-                  f"Влажность воздуха {weather[time_of_day]['humidity']}\n")
+    else:
+        await message.answer("Ошибка, перезапустите команду.")
+
+
+# этот хэндлер срабатывает на команду /vacancies
+@router.message(Command(commands=['vacancies']))
+async def get_weather(message: Message):
+    vacancies = go_vacancy()
+    print(vacancies)
+    result = ''
+
+    for vacancy in vacancies:
+        try:
+            if 'to' and 'from' in vacancy['salary']:
+                value = f"От {vacancy['salary']['from']} до {vacancy['salary']['to']} рублей"
+            elif 'from' in vacancy['salary']:
+                value = f"От {vacancy['salary']['from']} рублей"
+            elif 'to' in vacancy['salary']:
+                value = f"До {vacancy['salary']['to']} рублей"
+            else:
+                value = f"Не указано"
+        except KeyError:
+            value = f"Не указано"
+            print(f"Ошибка, перезапустите запрос.")
+        sample = (f"id вакансии: {vacancy['id']},\n"
+                  f"Наименовании вакансии: {vacancy['name']},\n"
+                  f"Желаемая зарплата: {value},\n"
+                  f"Требование: {vacancy['snippet']['requirement']},\n"
+                  f"Обязанности: {vacancy['snippet']['responsibility']},\n"
+                  f"Опубликовано: {vacancy['published_at']},\n"
+                  f"Отдел: {vacancy['department']},\n"
+                  f"Электронный адрес вакансии: {vacancy['vacancy_url']},\n"
+                  f"Трудоустройство: {vacancy['employment']}\n"
+                  f"<------------->\n")
         result += sample
     await message.answer(text=result)
 
@@ -60,7 +84,8 @@ async def get_weather(message: Message):
 # этот хэндлер срабатывает на команду /start
 @router.message(Command(commands=['start']))
 async def process_command_start(message: Message):
-    await message.answer("Привет! Меня зовут Топ-бот \n Напиши мне что-нибудь")
+    await message.answer("Привет! Меня зовут Топ-бот \nЯ умею находить текущий курс валют, "
+                         "три случайные вакансии и погоду на сегодня.")
 
 
 @router.message(Command(commands=["kb1"]))
