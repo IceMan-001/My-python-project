@@ -27,3 +27,9 @@ pip install -r requirements.txt
 Если вы хотите обновить компоненты вместо их повторной установки, используйте команду
 
 pip install -U -r requirements.txt.
+
+
+Для установки PowerShell с помощью опубликованных пакетов winget
+можно использовать следующие команды:
+
+winget search Microsoft.PowerShell

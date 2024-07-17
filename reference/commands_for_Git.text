@@ -47,6 +47,17 @@ git cat-file -t  e23807  посмотреть файл коммита
 git cat-file -p e23807 прочесть файл коммита
 git remote -v(vv) проверка настроек удаленного репозитория
 
+Посмотреть к какому удаленному репозиторию подключен git можно с помощью
+git remote -v или git config --get remote.origin.url
+git remote -v
+
+# origin    git@gitlab.com:путь/до/репозитория.git (fetch)
+# origin    git@gitlab.com:путь/до/репозитория.git (push)
+
+git config --get remote.origin.url
+# git@gitlab.com:путь/до/репозитория.git
+
+
 
 git branch посмотреть список всех ветвей в локальном репозитории
 git branch <branch name> создание новой ветки

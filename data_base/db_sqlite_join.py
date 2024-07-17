@@ -70,7 +70,7 @@ cursor.execute('''
 ''')
 
 rows = cursor.fetchall()
-
+print(rows)
 for row in rows:
     print(row)
 
