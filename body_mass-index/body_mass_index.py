@@ -5,30 +5,41 @@ from PIL import ImageTk
 
 def body_mass_index():
     try:
-        the_height = int(pole1.get())
-        the_weight = int(pole2.get())
+        the_height = float(pole1.get())
+        the_weight = float(pole2.get())
 
-        the_bmi = the_weight / (the_height / 100) ** 2
+        bmi = the_weight / (the_height / 100) ** 2
+
+        the_bmi = round(bmi, 1)
+
+        const_text = \
+            f'При введенном росте {the_height} см. и весе {the_weight} кг.\nиндекс массы тела составляет {the_bmi}'
 
         if the_bmi <= 18.5:
             answer.configure(
-                text=f'Oops! You are underweight.\nросте{the_height} и весе {the_weight} \nиндекс{the_bmi}\n'
-                     f'\N{unamused face}\N{unamused face}\N{unamused face}', fg='black')
+                text=f'Упс! У вас недостаточный вес.\n{const_text}\n\N{unamused face}\N{unamused face}\N{unamused face}',
+                fg='#FF4500')
+            answer.place(x=70, y=425)
 
         elif the_bmi <= 24.9:
             answer.configure(
-                text=f'Awesome! You are healthy.\nросте{the_height} и весе {the_weight} \nиндекс{the_bmi}\n',
-                fg='black')
+                text=f'Классно! Вы здоровы.\n{const_text}\n'
+                     f'\N{smiling face with sunglasses}\N{smiling face with sunglasses}\N{smiling face with sunglasses}',
+                fg='#006400')
+            answer.place(x=70, y=425)
 
         elif the_bmi <= 29.9:
             answer.configure(
-                text=f'Eee! You are overweight.\nросте{the_height} и весе {the_weight} \nиндекс{the_bmi}',
-                fg='black')
+                text=f'Ииии! У тебя избыточный вес.\n{const_text}\n'
+                     f'\N{zipper-mouth face}\N{zipper-mouth face}\N{zipper-mouth face}',
+                fg='#FF0000')
+            answer.place(x=70, y=425)
 
         else:
             answer.configure(
-                text=f'Seesh! You are obese.\nросте{the_height} и весе {the_weight} \nиндекс{the_bmi}',
-                fg='black')
+                text=f'Блин! У тебя ожирение.\n{const_text}\n\N{angry face}\N{angry face}\N{angry face}',
+                fg='#8B0000')
+            answer.place(x=70, y=425)
 
         pole1.delete(0, END)
         pole2.delete(0, END)
@@ -69,7 +80,7 @@ pole2 = tk.Entry(win)
 pole2.place(x=200, y=140)
 
 answer = tk.Label(win, text='Вывод результата вычисления...', font=('Arial', 12, 'bold'), bg=color)
-answer.place(x=150, y=425)
+answer.place(x=123, y=425)
 
 win.resizable(False, False)
 
