@@ -41,7 +41,7 @@ win.title('Мое графическое приложение')  # измене�
 
 h = 500
 w = 600
-win.geometry(f'{h}x{w}+100+200')
+win.geometry(f'{h}x{w}+600+200')
 
 win.resizable(False, False)
 

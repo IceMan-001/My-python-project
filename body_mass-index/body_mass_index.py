@@ -45,6 +45,7 @@ def body_mass_index():
         pole2.delete(0, END)
     except ValueError:
         answer.configure(text='Введите корректные данные!', fg='red')
+        answer.place(x=135, y=425)
         pole1.delete(0, END)
         pole2.delete(0, END)
 
@@ -61,13 +62,14 @@ win.title('Расчет индекса массы тела')  # изменени
 
 h = 500
 w = 600
-win.geometry(f'{h}x{w}+100+200')
+win.geometry(f'{h}x{w}+600+200')
 
 label = tk.Label(win, text='Вычислить массу тела', font=('Arial', 10, 'bold'), bg=color)
 label.place(relx=0.68, rely=0.37, anchor='e')
 image = ImageTk.PhotoImage(file="img/satisfaction-icon_1.png")
 btn = tk.Button(win, relief=tk.RAISED, bd=5, width=200, height=100, image=image, command=body_mass_index)
 btn.place(relx=0.3, rely=0.5, anchor='w')
+
 
 n = tk.Label(win, text='Введите рост', bg='#FAEBD7')
 n.place(relx=0.60, rely=0.07, anchor='e')
