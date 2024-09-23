@@ -36,12 +36,12 @@ def elements_are_common_to_the_two_lists(list_1, list_2) -> list:
     return array
 
 
-def elements_common_to_the_two_lists(list_1, list_2):
+def elements_common_to_the_two_lists(list_1, list_2) -> list:
     # Сформировать третий список, содержащий только уникальные элементы каждого из списков
     return list(set(list_1) ^ (set(list_2)))
 
 
-def min_max_list(list_1, list_2):
+def min_max_list(list_1, list_2) -> tuple:
     # Сформировать третий список, содержащий только минимальное и максимальное значение каждого из списков
     temp_array = list_1 + list_2
 
